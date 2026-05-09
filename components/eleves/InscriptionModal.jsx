@@ -149,9 +149,9 @@ export default function InscriptionModal({ user, onClose, onSuccess }) {
     // On installe d'abord l'écouteur pour ne pas rater une réponse rapide du serveur
     const timeout = setTimeout(() => {
       submittingRef.current = false
-      setErrMsg('Timeout — pas de réponse du serveur')
+      setErrMsg('Timeout — pas de réponse du serveur (le serveur gratuit est lent, réessaie)')
       setEtape('erreur')
-    }, 60000)
+    }, 120000)  // 120s — Render free tier (0.1 CPU) peut prendre ~60-90s
 
     const onDisconnect = (reason) => {
       clearTimeout(timeout)
@@ -176,6 +176,7 @@ export default function InscriptionModal({ user, onClose, onSuccess }) {
 
     // Envoie en Float32Array (binaire) — ~640 Ko au lieu de ~2 Mo en JSON.
     // Socket.IO gère nativement les ArrayBuffer.
+    setEtape('traitement')  // affiche "traitement en cours..."
     const f32 = new Float32Array(bufferRef.current)
     socket.emit('enregistrement_voix', {
       signal:   f32.buffer,
@@ -244,6 +245,24 @@ export default function InscriptionModal({ user, onClose, onSuccess }) {
       </motion.div>
     ),
 
+    traitement: (
+      <motion.div className="text-center py-10 space-y-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div className="text-5xl"
+          animate={{ rotate: 360 }} transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}>
+          ⚙️
+        </motion.div>
+        <p className="font-bold text-lg" style={{ color: '#2D6A4F' }}>Analyse vocale en cours…</p>
+        <p className="text-sm" style={{ color: '#6B6357' }}>Le serveur traite ta voix, patiente 60-90 secondes</p>
+        <div className="flex justify-center gap-1 mt-2">
+          {[0,1,2].map(i => (
+            <motion.div key={i} className="w-2 h-2 rounded-full" style={{ background: '#52B788' }}
+              animate={{ opacity: [0.3, 1, 0.3] }}
+              transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.4 }} />
+          ))}
+        </div>
+      </motion.div>
+    ),
+
     ok: (
       <motion.div className="text-center py-10" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
         <motion.div className="text-6xl mb-4" animate={{ rotate: [0, 10, -10, 0] }}>✅</motion.div>
@@ -266,7 +285,7 @@ export default function InscriptionModal({ user, onClose, onSuccess }) {
     ),
   }
 
-  const stepIdx = ['formulaire','compte','enregistrement','ok'].indexOf(etape)
+  const stepIdx = ['formulaire','compte','enregistrement','traitement','ok'].indexOf(etape)
 
   return (
     <motion.div
