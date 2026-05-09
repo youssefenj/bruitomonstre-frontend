@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
-const api = axios.create({ baseURL: `${API_URL}/api` })
+const api = axios.create({ baseURL: `${API_URL}/api`, timeout: 60000 })
 
 export const login       = (identifiant, password) => api.post('/auth/login', { identifiant, password })
 export const getEleves   = (classe)  => api.get('/eleves/', { params: { classe } })
