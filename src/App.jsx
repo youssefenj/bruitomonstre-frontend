@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Login from './components/Login'
-import Professeur from './pages/Professeur'
-import Directeur from './pages/Directeur'
+import Professeur from './views/Professeur'
+import Directeur from './views/Directeur'
 
 export default function App() {
   const [user, setUser] = useState(null)
