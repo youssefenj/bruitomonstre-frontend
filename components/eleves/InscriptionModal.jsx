@@ -6,10 +6,9 @@ import { addEleve } from '../../lib/api'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 
-// Duree d'enregistrement = 10 secondes (réduit pour hébergement gratuit)
-// Sur Render free tier (0.1 CPU), 30s = ~14 segments = ~2min de traitement.
-// 10s = ~3-4 segments = ~20-30s de traitement, compatible avec le timeout 60s.
-const DUREE = 10000
+// Duree d'enregistrement = 5 secondes (réduit pour Render free tier 512MB RAM)
+// 5s = 80 000 floats = ~300 KB binaire → 1-2 segments Resemblyzer → ~20s CPU
+const DUREE = 5000
 
 export default function InscriptionModal({ user, onClose, onSuccess }) {
   const [prenom,   setPrenom]   = useState('')
@@ -228,7 +227,7 @@ export default function InscriptionModal({ user, onClose, onSuccess }) {
         <div>
           <p className="font-bold text-lg" style={{ color: '#C0392B' }}>PARLE maintenant !</p>
           <p className="text-sm mt-1" style={{ color: '#6B6357' }}>
-            Lis un texte à voix haute pendant 10 secondes, {prenom}
+            Parle clairement pendant 5 secondes, {prenom}
           </p>
           <p className="text-xs mt-1" style={{ color: '#6B6357' }}>
             (Parle clairement, sans pauses trop longues)
