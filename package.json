@@ -1,0 +1,44 @@
+{
+  "name": "bruitomonstre-frontend",
+  "version": "3.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^14.2.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "socket.io-client": "^4.7.5",
+    "axios": "^1.7.7",
+    "framer-motion": "^11.3.31",
+    "three": "^0.168.0",
+    "@react-three/fiber": "^8.17.10",
+    "@react-three/drei": "^9.112.0",
+    "@react-three/postprocessing": "^2.16.2",
+    "@react-spring/three": "^9.7.4",
+    "postprocessing": "^6.36.3",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-tabs": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.2",
+    "@radix-ui/react-progress": "^1.1.0",
+    "@radix-ui/react-separator": "^1.1.0",
+    "@radix-ui/react-avatar": "^1.1.0",
+    "@radix-ui/react-scroll-area": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.2",
+    "lucide-react": "^0.436.0",
+    "recharts": "^2.13.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5"
+  }
+}

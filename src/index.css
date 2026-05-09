@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: #FAF7F2;
+  color: #2D2A24;
+}
+
+/* Scrollbar verte moderne */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #EDE8DF; }
+::-webkit-scrollbar-thumb { background: #40916C; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2D6A4F; }
+
+/* Animation bannière */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateX(-50%) translateY(-16px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}

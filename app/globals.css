@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* ── Palette vert + beige moderne ── */
+    --bg:           #FAF7F2;   /* fond page principal — beige chaleureux */
+    --surface:      #FFFFFF;   /* cartes — blanc pur */
+    --surface-2:    #EDE8DF;   /* sections secondaires — beige moyen */
+    --border:       #D6CEBE;   /* bordures — beige */
+    --text:         #2D2A24;   /* texte principal — brun foncé */
+    --text-muted:   #6B6357;   /* texte secondaire */
+    --primary:      #2D6A4F;   /* vert moyen — boutons, accents */
+    --primary-hover:#40916C;   /* vert hover */
+    --primary-light:#52B788;   /* vert clair */
+    --primary-pale: #D8F3DC;   /* vert très pâle */
+    --success:      #27AE60;
+    --warning:      #D4761B;
+    --danger:       #C0392B;
+    --gold:         #C8A96E;   /* accent doré */
+
+    /* Sidebar dark (vert forêt profond) */
+    --sidebar-bg:   #0F2318;
+    --sidebar-surf: #112A1E;
+    --sidebar-bord: rgba(82,183,136,0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(45, 106, 79, 0.25);
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track  { background: var(--surface-2); }
+  ::-webkit-scrollbar-thumb  { background: #40916C; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #2D6A4F; }
+}
+
+@layer components {
+  /* Glass card — version beige */
+  .glass {
+    background: rgba(255, 255, 255, 0.70);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(214, 206, 190, 0.6);
+    border-radius: 1rem;
+  }
+
+  /* Gradient border vert */
+  .gradient-border {
+    position: relative;
+    background: var(--surface);
+    border-radius: 1rem;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(135deg, #2D6A4F, #52B788, #C8A96E);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* Noise overlay */
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* Sidebar nav item */
+  .nav-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 cursor-pointer;
+    color: rgba(82,183,136,0.65);
+  }
+  .nav-item:hover {
+    background: rgba(82,183,136,0.10);
+    color: #52B788;
+  }
+  .nav-item.active {
+    background: rgba(45,106,79,0.22);
+    color: #52B788;
+    box-shadow: inset 3px 0 0 #2D6A4F;
+  }
+}
+
+@layer utilities {
+  /* Dégradé vert → doré */
+  .text-gradient {
+    background: linear-gradient(135deg, #2D6A4F, #52B788, #C8A96E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Grille de fond subtile verte */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(45,106,79,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(45,106,79,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+/* Animation shimmer */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
