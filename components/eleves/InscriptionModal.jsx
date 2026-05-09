@@ -6,11 +6,10 @@ import { addEleve } from '../../lib/api'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 
-// Duree d'enregistrement = 30 secondes
-// Equilibre entre confort utilisateur et qualite d'empreinte. Avec le
-// moyennage multi-segments (4s, recouvrement 50%) cote backend, 30s
-// donne ~14 sous-embeddings -> profil tres stable.
-const DUREE = 30000
+// Duree d'enregistrement = 10 secondes (réduit pour hébergement gratuit)
+// Sur Render free tier (0.1 CPU), 30s = ~14 segments = ~2min de traitement.
+// 10s = ~3-4 segments = ~20-30s de traitement, compatible avec le timeout 60s.
+const DUREE = 10000
 
 export default function InscriptionModal({ user, onClose, onSuccess }) {
   const [prenom,   setPrenom]   = useState('')
@@ -228,7 +227,7 @@ export default function InscriptionModal({ user, onClose, onSuccess }) {
         <div>
           <p className="font-bold text-lg" style={{ color: '#C0392B' }}>PARLE maintenant !</p>
           <p className="text-sm mt-1" style={{ color: '#6B6357' }}>
-            Lis un texte à voix haute pendant 30 secondes, {prenom}
+            Lis un texte à voix haute pendant 10 secondes, {prenom}
           </p>
           <p className="text-xs mt-1" style={{ color: '#6B6357' }}>
             (Parle clairement, sans pauses trop longues)
