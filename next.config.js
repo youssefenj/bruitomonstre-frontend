@@ -1,14 +1,16 @@
 /** @type {import('next').NextConfig} */
+const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+
 const nextConfig = {
   async rewrites() {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:8000/api/:path*',
+        destination: `${BACKEND_URL}/api/:path*`,
       },
       {
         source: '/socket.io/:path*',
-        destination: 'http://localhost:8000/socket.io/:path*',
+        destination: `${BACKEND_URL}/socket.io/:path*`,
       },
     ]
   },
